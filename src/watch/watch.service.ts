@@ -42,9 +42,15 @@ export class WatchService {
       const newWatch: Partial<Watch> = {
         userId: user.id,
         video,
-      }
+      };
 
-      return watchRepo.save(newWatch)
+      const savedWatch: Watch = await watchRepo.save(newWatch);
+
+      setTimeout(() => {
+        this.remove(savedWatch.id, user);
+      }, video.duration)
+
+      return savedWatch;
     })
   }
 
