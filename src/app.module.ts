@@ -7,6 +7,8 @@ import { GQLDate } from './graphql/scaler/GQLDate';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { CurrentDatePubSub } from './current-date-pub-sub/current-date-pub-sub';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
@@ -34,6 +36,10 @@ import { CurrentDatePubSub } from './current-date-pub-sub/current-date-pub-sub';
     AppResolver,
     CurrentDatePubSub,
     GQLDate,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AppModule {}
