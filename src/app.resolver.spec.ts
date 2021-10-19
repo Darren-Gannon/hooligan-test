@@ -37,5 +37,9 @@ describe('AppResolver', () => {
     it('should return current date', () => {
       expect(resolver.date()).toBe(testDate);
     });
+
+    it('should return live date', () => {
+      expect(resolver.currentDate().next()).toBeDefined();
+    });
   })
 });
