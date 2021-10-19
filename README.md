@@ -28,5 +28,6 @@ WATCH_LIMIT: the maximum number of videos a user can watch (default 3)
 
 Environmental variables can be set up in the .env file 
 
-PORT: the port the api is hosted on (default 3000)
-WATCH_LIMIT: the maximum number of videos a user can watch (default 3)
+`PORT`: the port the api is hosted on (default 3000)
+
+`WATCH_LIMIT`: the maximum number of videos a user can watch (default 3)
