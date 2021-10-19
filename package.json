@@ -37,6 +37,7 @@
     "graphql": "^15.6.1",
     "graphql-subscriptions": "^1.2.1",
     "joi": "^17.4.2",
+    "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.4.0",

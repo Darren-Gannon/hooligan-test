@@ -2,12 +2,20 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as morgan from 'morgan';
 
 async function bootstrap() {
 
-  const bootstrapLogger: Logger = new Logger('boostrap', { timestamp: true });
+  const bootstrapLogger: Logger = new Logger('boostrap');
+  const morganLogger: Logger = new Logger('Morgan');
 
   const app = await NestFactory.create(AppModule);
+
+  app.use(morgan('tiny', {
+    stream: {
+        write: (message) => morganLogger.log(message.replace('\n', '')),
+    },
+  }));
 
   app.useGlobalPipes(new ValidationPipe());
 
