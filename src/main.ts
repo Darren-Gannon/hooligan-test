@@ -15,6 +15,7 @@ async function bootstrap() {
     .setVersion('0.0.1')
     .addTag('hooligan')
     .addTag('streaming')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
