@@ -1,4 +1,4 @@
-import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
+import { ForbiddenException, Inject, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { User } from 'express';
 import { Video } from '../video/entities/video.entity';
@@ -18,6 +18,8 @@ export class WatchService {
     private readonly videoService: VideoService,
     @Inject(WATCH_MODULE_CONFIG) private readonly config: WatchModuleConfig,
   ) {}
+
+  private readonly logger: Logger = new Logger(WatchService.name);
 
   create(createWatchInput: CreateWatchInput, user: User): Promise<Watch> {
     return this.connection.transaction(async manager => {
@@ -44,10 +46,16 @@ export class WatchService {
         video,
       };
 
-      const savedWatch: Watch = await watchRepo.save(newWatch);
+      const savedWatch: Watch = await watchRepo.save(newWatch).catch(err => {
+        this.logger.error(err);
+        throw new InternalServerErrorException()
+      });
 
       setTimeout(() => {
-        this.remove(savedWatch.id, user);
+        this.remove(savedWatch.id, user).catch(err => {
+          this.logger.error(err);
+          throw new InternalServerErrorException()
+        });
       }, video.duration)
 
       return savedWatch;
@@ -68,7 +76,7 @@ export class WatchService {
         userId: user.id,
         id,
       }
-    });
+    }).catch(err => { throw new NotFoundException() });
   }
 
   remove(id: string, user: User): Promise<Watch> {
@@ -77,7 +85,10 @@ export class WatchService {
 
       const watch: Watch = await this.findOne(id, user);
 
-      return watchRepo.remove(watch);
+      return watchRepo.remove(watch).catch(err => {
+        this.logger.error(err);
+        throw new InternalServerErrorException()
+      });
     });
   }
 }
