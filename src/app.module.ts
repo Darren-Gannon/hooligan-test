@@ -37,7 +37,7 @@ import { WATCH_LIMIT } from './constants';
     }),
     TypeOrmModule.forRoot({
       type: "sqlite",
-      database: `/db/db.sqlite`,
+      database: ':memory:',
       logging: true,
       synchronize: true,
       entities: [
