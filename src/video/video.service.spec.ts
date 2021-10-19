@@ -95,4 +95,89 @@ describe('VideoService', () => {
       })
     })
   });
+
+  describe('remove video', () => {
+    let service: VideoService;
+
+    beforeEach(async () => {
+      const module: TestingModule = await Test.createTestingModule({
+        providers: [
+          VideoService,
+          {
+            provide: getRepositoryToken(Video),
+            useValue: {
+              remove: async (video) => video
+            }
+          }
+        ],
+      }).compile();
+
+      service = module.get<VideoService>(VideoService);
+    });
+
+    it('should remove a video', () => {
+      service.remove('1', defaultUser).then(video => {
+        expect(video).toBeDefined()
+        expect(video.name).toBe('')
+        expect(video.duration).toBe(1)
+      })
+    })
+  });
+
+  describe('find a video', () => {
+    let service: VideoService;
+
+    beforeEach(async () => {
+      const module: TestingModule = await Test.createTestingModule({
+        providers: [
+          VideoService,
+          {
+            provide: getRepositoryToken(Video),
+            useValue: {
+              findOneOrFail: async () => ({
+                name: '',
+                duration: 1
+              })
+            }
+          }
+        ],
+      }).compile();
+
+      service = module.get<VideoService>(VideoService);
+    });
+
+    it('should find a video', () => {
+      service.findOne('1', defaultUser).then(video => {
+        expect(video).toBeDefined()
+        expect(video.name).toBe('')
+        expect(video.duration).toBe(1)
+      })
+    })
+  });
+
+  describe('find all videos', () => {
+    let service: VideoService;
+
+    beforeEach(async () => {
+      const module: TestingModule = await Test.createTestingModule({
+        providers: [
+          VideoService,
+          {
+            provide: getRepositoryToken(Video),
+            useValue: {
+              find: async () => []
+            }
+          }
+        ],
+      }).compile();
+
+      service = module.get<VideoService>(VideoService);
+    });
+
+    it('should find all videos', () => {
+      service.findAll(defaultUser).then(video => {
+        expect(video).toBeDefined()
+      })
+    })
+  });
 });
