@@ -7,6 +7,9 @@ import { GQLDate } from './graphql/scaler/GQLDate';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { CurrentDatePubSub } from './current-date-pub-sub/current-date-pub-sub';
+import { VideoModule } from './video/video.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Video } from './video/entities/video.entity';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 
@@ -29,6 +32,14 @@ import { AuthGuard } from './auth.guard';
       sortSchema: true,
       context: ({ req }) => ({ req })
     }),
+    TypeOrmModule.forRoot({
+      type: "sqlite",
+      database: `/db/db.sqlite`,
+      logging: true,
+      synchronize: true,
+      entities: [Video]
+    }),
+    VideoModule,
   ],
   controllers: [AppController],
   providers: [
