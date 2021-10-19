@@ -6,12 +6,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Video } from './entities/video.entity';
 
 @Module({
-  providers: [VideoResolver, VideoService],
-  controllers: [VideoController],
+  providers: [
+    VideoResolver, 
+    VideoService,
+  ],
+  controllers: [
+    VideoController,
+  ],
   imports: [
     TypeOrmModule.forFeature([
       Video,
     ])
+  ],
+  exports: [
+    VideoService,
   ]
 })
 export class VideoModule {}
