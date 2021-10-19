@@ -23,12 +23,15 @@ export class WatchService {
     return this.connection.transaction(async manager => {
       const watchRepo: Repository<Watch> = manager.getRepository(Watch);
 
-      if(this.config.watchLimit > 1) {
+      if(this.config.watchLimit > 0) {
         const count: number = await watchRepo.count({
           where: {
             userId: user.id
           }
         })
+
+        if(count == this.config.watchLimit)
+          throw new ForbiddenException(`Watch limit has been reached. Watch count/limit is '${count}/${this.config.watchLimit}'`);
 
         if(count > this.config.watchLimit)
           throw new ForbiddenException(`Watch limit has been exceeded. Watch count/limit is '${count}/${this.config.watchLimit}'`);
