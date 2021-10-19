@@ -15,7 +15,7 @@ export class VideoService {
 
   create(createVideoInput: CreateVideoInput, user: User): Promise<Video> {
     return this.videoRepo.save({
-      name: createVideoInput.name,
+      ...createVideoInput,
       authorId: user.id,
     });
   }
@@ -33,7 +33,7 @@ export class VideoService {
 
     return this.videoRepo.save({
       ...original,
-      name: updateVideoInput?.name,
+      ...updateVideoInput,
     });
   }
 

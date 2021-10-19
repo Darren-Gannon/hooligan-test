@@ -6,4 +6,8 @@ export class CreateVideoInput {
   @ApiProperty()
   @Field(() => String)
   name: string;
+
+  @ApiProperty()
+  @Field(() => Number)
+  duration: number;
 }
