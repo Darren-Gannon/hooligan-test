@@ -8,9 +8,9 @@ Underneath we use nestjs which supports swagger and a graphical playground.
 
 ### Docker
 
-Quick run: `docker run darren-gannon/hooligan-test`
+Quick run: `docker run darrengannon/hooligan-test`
 
-1. Run `docker run darren-gannon/hooligan-test`
+1. Run `docker run darrengannon/hooligan-test`
 1. Wait for bootstrap log to provide you with the access url
 
 #### Environmental Variables
