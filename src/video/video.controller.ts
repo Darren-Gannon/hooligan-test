@@ -14,7 +14,7 @@ export class VideoController {
   
     @Post()
     createVideo(
-      @Body('createVideoInput') createVideoInput: CreateVideoInput,
+      @Body() createVideoInput: CreateVideoInput,
       @Req() req: Request,
     ) {
       return this.videoService.create(createVideoInput, req.user);
