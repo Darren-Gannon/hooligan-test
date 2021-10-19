@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PubSub } from "graphql-subscriptions";
-import { CURRENT_DATE_PUB_SUB } from "src/constants";
+import { CURRENT_DATE_PUB_SUB } from "../constants";
 
 @Injectable()
 export class CurrentDatePubSub extends PubSub {
