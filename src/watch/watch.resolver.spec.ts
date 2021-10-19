@@ -7,7 +7,13 @@ describe('WatchResolver', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [WatchResolver, WatchService],
+      providers: [
+        WatchResolver, 
+        {
+          provide: WatchService,
+          useValue: {}
+        }
+      ],
     }).compile();
 
     resolver = module.get<WatchResolver>(WatchResolver);

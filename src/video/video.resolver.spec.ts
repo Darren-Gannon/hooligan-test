@@ -7,7 +7,13 @@ describe('VideoResolver', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [VideoResolver, VideoService],
+      providers: [
+        VideoResolver, 
+        {
+          provide: VideoService,
+          useValue: {}
+        }
+      ],
     }).compile();
 
     resolver = module.get<VideoResolver>(VideoResolver);

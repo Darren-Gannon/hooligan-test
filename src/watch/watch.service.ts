@@ -1,8 +1,8 @@
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
 import { User } from 'express';
-import { Video } from 'src/video/entities/video.entity';
-import { VideoService } from 'src/video/video.service';
+import { Video } from '../video/entities/video.entity';
+import { VideoService } from '../video/video.service';
 import { Connection, Repository } from 'typeorm';
 import { WATCH_MODULE_CONFIG } from './constants';
 import { CreateWatchInput } from './dto/create-watch.input';

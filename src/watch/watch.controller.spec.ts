@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WatchController } from './watch.controller';
+import { WatchService } from './watch.service';
 
 describe('WatchController', () => {
   let controller: WatchController;
@@ -7,6 +8,12 @@ describe('WatchController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [WatchController],
+      providers: [
+        {
+          provide: WatchService,
+          useValue: {}
+        }
+      ]
     }).compile();
 
     controller = module.get<WatchController>(WatchController);
