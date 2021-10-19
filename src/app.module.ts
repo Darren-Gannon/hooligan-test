@@ -3,9 +3,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppResolver } from './app.resolver';
-import { PubSub } from 'graphql-subscriptions';
-import { CURRENT_DATE_PUB_SUB } from './constants';
 import { GQLDate } from './graphql/scaler/GQLDate';
+import { CurrentDatePubSub } from './current-date-pub-sub/current-date-pub-sub';
 
 @Module({
   imports: [
@@ -22,18 +21,7 @@ import { GQLDate } from './graphql/scaler/GQLDate';
   providers: [
     AppService, 
     AppResolver,
-    {
-      provide: CURRENT_DATE_PUB_SUB,
-      useFactory: () => {
-        const pubSub: PubSub = new PubSub()
-        
-        setInterval(() => {
-          pubSub.publish(CURRENT_DATE_PUB_SUB, new Date())
-        }, 1000);
-
-        return pubSub;
-      },
-    },
+    CurrentDatePubSub,
     GQLDate,
   ],
 })
