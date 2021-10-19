@@ -1,7 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { GQLDate } from 'src/graphql/scaler/GQLDate';
 import { Video } from 'src/video/entities/video.entity';
-import { CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
@@ -16,6 +15,7 @@ export class Watch {
   video: Video;
 
   @Field(() => ID)
+  @Column()
   userId: string;
 
   @CreateDateColumn()
