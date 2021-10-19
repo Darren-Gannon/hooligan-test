@@ -9,7 +9,7 @@ export class Watch {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => Video)
+  @OneToOne(() => Video, { eager: true, cascade: true })
   @JoinColumn()
   @Field(() => Video)
   video: Video;
