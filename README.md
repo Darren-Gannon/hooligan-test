@@ -14,8 +14,10 @@ Quick run: `docker run darren-gannon/hooligan-test`
 1. Wait for bootstrap log to provide you with the access url
 
 #### Environmental Variables
-PORT: the port the api is hosted on (default 3000)
-WATCH_LIMIT: the maximum number of videos a user can watch (default 3)
+
+`PORT`: the port the api is hosted on (default 3000)
+
+`WATCH_LIMIT`: the maximum number of videos a user can watch (default 3)
 
 ### Native
 
